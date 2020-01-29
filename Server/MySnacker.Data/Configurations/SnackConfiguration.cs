@@ -30,10 +30,10 @@ namespace MySnacker.Data.Configurations
                 .IsRequired();
 
             builder
-           .HasMany(x => x.Measures)
-           .WithOne(x => x.Snack)
-           .HasForeignKey(x => x.SnackId)
-           .IsRequired();
+               .HasMany(x => x.Measures)
+               .WithOne(x => x.Snack)
+               .HasForeignKey(x => x.SnackId)
+               .IsRequired();
         }
     }
 }
