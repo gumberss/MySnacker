@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Flavors]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] VARCHAR(20) NOT NULL, 
+    [PreparationTime] BIGINT NOT NULL, 
+    [SnackId] UNIQUEIDENTIFIER NOT NULL ,
+	CONSTRAINT FK_Flavor_Snack FOREIGN KEY (SnackId)
+    REFERENCES Snacks(Id)
+)

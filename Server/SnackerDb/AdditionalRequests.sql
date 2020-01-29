@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[AdditionalRequests]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY
+)

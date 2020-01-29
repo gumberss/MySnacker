@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="34277edb-d060-4d15-a8a8-280a34140097" ChangeDateTime="01/27/2020 23:54:37">
+    <Property Name="ElementName" Value="[dbo].[Flavor].[Price]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flavor]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Value" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e9230d4f-03da-4c94-b4cc-4dddc37907ef" ChangeDateTime="01/28/2020 00:13:11">
+    <Property Name="ElementName" Value="[dbo].[Flavor].[PreparationTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flavor]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AddictionalTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2ea58693-8f8f-49e0-a5cd-3ff699033550" ChangeDateTime="01/28/2020 00:13:22">
+    <Property Name="ElementName" Value="[dbo].[Flavor].[AddictionalTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flavor]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PreparationTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bea74501-e37a-4e22-ab9e-3a29ed488584" ChangeDateTime="01/28/2020 03:06:04">
+    <Property Name="ElementName" Value="[dbo].[Request].[MesureId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Request]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MeasureId" />
+  </Operation>
+</Operations>
