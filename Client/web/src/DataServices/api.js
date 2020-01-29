@@ -1,8 +1,7 @@
-const call = (path, method = "get", data) => fetch('http://localhost:3001/' + path,
+const call = (path, method = "get", data) => fetch('http://localhost:3448/' + path,
     {
         method: method,
         headers: {
-            'Authorization': 'whatever-you-want',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
