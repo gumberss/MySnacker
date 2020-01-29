@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="EntityFramework" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySnacker.Data\MySnacker.Data.csproj" />
+    <ProjectReference Include="..\MySnacker.Domain\MySnacker.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
