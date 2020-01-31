@@ -11,6 +11,6 @@ export default function snacks(state = {}, action) {
 
     const handler = acceptedActions[action.type]
 
-    return handler && handler(state, action) || state
+    return (handler && handler(state, action)) || state
 
 }
