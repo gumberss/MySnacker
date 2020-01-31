@@ -3,11 +3,11 @@ import { RECEIVE_SNACK_DATA } from '../Actions/snacks'
 const acceptedActions = {
     [RECEIVE_SNACK_DATA]: (state, action) => ({
         ...state,
-        [action.snack.id]: action.snack.measures
+        [action.snack.id]: action.snack.flavors
     })
 }
 
-export default function measures(state = {}, action) {
+export default function flavors(state = {}, action) {
 
     const handler = acceptedActions[action.type]
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import SnackView from './SnackView'
 import SnackMeasure from './SnackMeasure'
-//import SnackFlavor from './SnackFlavor'
+import SnackFlavor from './SnackFlavor'
 
 class SnackCard extends React.Component {
 
@@ -22,7 +22,7 @@ class SnackCard extends React.Component {
             return [
                 <SnackView id={id} goAhead={goAhead} goBack={goBack} ></SnackView >,
                 <SnackMeasure id={id} goAhead={goAhead} goBack={goBack} > </SnackMeasure>,
-                //<SnackFlavor id={id} goAhead={goAhead} goBack={goBack} > </SnackFlavor>
+                <SnackFlavor id={id} goAhead={goAhead} goBack={goBack} > </SnackFlavor>
             ]
         }
 

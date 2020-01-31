@@ -11,10 +11,14 @@ class SnackMeasure extends React.Component {
                 <h3>{snack.name}</h3>
 
                 <div style={styles.content}>
-                    {measures && measures.map(mesure => (
+                    {measures && measures.map(measure => (
                         <div className="custom-control custom-radio">
-                            <input type="radio" name={`measure_for_${snack.id}`} className="custom-control-input" id={mesure.id} />
-                            <label className="custom-control-label" for={mesure.id}>{mesure.size} {measures.description}</label>
+                            <input type="radio" name={`measure_for_${snack.id}`} className="custom-control-input" id={measure.id} />
+                            <label className="custom-control-label" for={measure.id}>
+                                {measure.size} {measure.description}
+                                {measure.price && (<><br /> {`(Adicional R$${measure.price})`}</>)}
+                                {measure.preparationTime && (<><br /> {` (Adicional ${new Date(measure.preparationTime / 10000).getMinutes()}:00 minutos)`}</>)}
+                            </label>
                         </div>
                     ))}
                 </div>

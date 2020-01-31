@@ -1,4 +1,4 @@
-import { RECEIVE_SNACKS } from '../Actions/Snacks'
+import { RECEIVE_SNACKS } from '../Actions/snacks'
 
 const acceptedActions = {
     [RECEIVE_SNACKS]: (state, action) => ({

@@ -14,7 +14,9 @@ class SnackFlavor extends React.Component {
                     {flavors && flavors.map(flavor => (
                         <div className="custom-control custom-radio">
                             <input type="radio" name={`measure_for_${snack.id}`} className="custom-control-input" id={flavor.id} />
-                            <label className="custom-control-label" for={flavor.id}>{flavor.name} {flavor.preparationTime}</label>
+                            <label className="custom-control-label" for={flavor.id}>
+                                {flavor.name} {flavor.preparationTime ? `(Adicional ${new Date(flavor.preparationTime / 10000).getMinutes()}:00 minutos)` : ''}
+                            </label>
                         </div>
                     ))}
                 </div>

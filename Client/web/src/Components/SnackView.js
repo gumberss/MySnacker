@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { handleGetSnackData } from '../Actions/Snacks'
+import { handleGetSnackData } from '../Actions/snacks'
 
 import logo from '../Assets/loadinngSnackData.gif'
 

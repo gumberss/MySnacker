@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { handleGetSnacks } from '../Actions/Snacks'
+import { handleGetSnacks } from '../Actions/snacks'
 import SnackCard from '../Components/SnackCard'
 
 class SnackList extends React.Component {
