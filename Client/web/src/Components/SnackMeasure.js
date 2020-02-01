@@ -12,7 +12,9 @@ class SnackMeasure extends React.Component {
                 <h3>{request.name} {request.measure && request.measure.size}</h3>
 
                 <div style={styles.content}>
-                    {measures && measures.map(measure => (
+                    {measures && measures
+                    .sort((first, second) => first.price - second.price)
+                    .map(measure => (
                         <div className="custom-control custom-radio" key={measure.id}>
                             <input
                                 type="radio"
