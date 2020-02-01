@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import SnackView from './SnackView'
 import SnackMeasure from './SnackMeasure'
 import SnackFlavor from './SnackFlavor'
+import SnackAdditional from './SnackAdditional'
 
 class SnackCard extends React.Component {
 
@@ -20,9 +21,10 @@ class SnackCard extends React.Component {
 
         const viewsFunction = (id, goAhead, goBack) => {
             return [
-                <SnackView id={id} goAhead={goAhead} goBack={goBack} ></SnackView >,
-                <SnackMeasure id={id} goAhead={goAhead} goBack={goBack} > </SnackMeasure>,
-                <SnackFlavor id={id} goAhead={goAhead} goBack={goBack} > </SnackFlavor>
+                <SnackView id={id} goAhead={goAhead} goBack={goBack} />,
+                <SnackMeasure id={id} goAhead={goAhead} goBack={goBack} />,
+                <SnackFlavor id={id} goAhead={goAhead} goBack={goBack} />,
+                <SnackAdditional id={id} goAhead={goAhead} goBack={goBack} />
             ]
         }
 
@@ -44,7 +46,7 @@ class SnackCard extends React.Component {
                 onMouseEnter={this.onFocus}
                 onMouseLeave={this.onFocusLost}
             >
-                 {views[progress]}
+                {views[progress]}
             </div>
         )
     }

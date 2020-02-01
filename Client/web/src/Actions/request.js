@@ -2,6 +2,7 @@
 export const START_REQUEST = 'START_REQUEST'
 export const SELECT_MEASURE = 'SELECT_MEASURE'
 export const SELECT_FLAVOR = 'SELECT_FLAVOR'
+export const SELECT_ADDITIONAL = 'SELECT_ADDITIONAL'
 
 export function startRequest(snack) {
     return {
@@ -23,5 +24,13 @@ export function selectFlavor(snackId, flavor) {
         type: SELECT_FLAVOR,
         snackId,
         flavor
+    }
+}
+
+export function selectAdditional(snackId, additional) {
+    return {
+        type: SELECT_ADDITIONAL,
+        snackId,
+        additional
     }
 }

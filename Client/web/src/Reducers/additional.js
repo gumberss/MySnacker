@@ -4,14 +4,15 @@ const acceptedActions = {
     [RECEIVE_SNACK_DATA]: (state, action) => ({
         ...state,
         [action.snack.id]: [
-            ...action.snack.measures
+            ...action.snack.additional
         ]
     })
 }
 
-export default function measures(state = {}, action) {
+export default function flavors(state = {}, action) {
 
     const handler = acceptedActions[action.type]
 
     return (handler && handler(state, action)) || state
+
 }

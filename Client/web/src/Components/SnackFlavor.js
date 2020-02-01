@@ -10,7 +10,7 @@ class SnackFlavor extends React.Component {
 
         return (
             <>
-                <h3>{request.name} {request.measure && request.measure.size}</h3>
+                <h3>{request.name} {request.measure.size}</h3>
 
                 <div style={styles.content}>
                     {flavors && flavors.map(flavor => (
@@ -20,7 +20,7 @@ class SnackFlavor extends React.Component {
                                 name={`flavor_for_${request.id}`}
                                 className="custom-control-input"
                                 id={flavor.id}
-                                onChange={this.handleMeasureChange}
+                                onChange={this.handleFlavorChange}
                                 value={flavor.id}
                             />
                             <label className="custom-control-label" htmlFor={flavor.id}>
@@ -50,7 +50,7 @@ class SnackFlavor extends React.Component {
     }
 
 
-    handleMeasureChange = changeEvent => {
+    handleFlavorChange = changeEvent => {
         const { id, selectFlavor, flavors } = this.props
         const { value } = changeEvent.target
 

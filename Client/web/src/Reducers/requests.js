@@ -1,4 +1,4 @@
-import { START_REQUEST, SELECT_MEASURE, SELECT_FLAVOR } from '../Actions/request'
+import { START_REQUEST, SELECT_MEASURE, SELECT_FLAVOR, SELECT_ADDITIONAL } from '../Actions/request'
 
 const acceptedActions = {
     [START_REQUEST]: (state, action) => ({
@@ -19,6 +19,13 @@ const acceptedActions = {
         [action.snackId]: {
             ...state[action.snackId],
             flavor: { ...action.flavor }
+        }
+    }),
+    [SELECT_ADDITIONAL]: (state, action) => ({
+        ...state,
+        [action.snackId]: {
+            ...state[action.snackId],
+            additional: [ ...action.additional ]
         }
     })
 }
