@@ -16,7 +16,7 @@ class SnackAdditional extends React.Component {
                     {additional && additional.map(additionalData => (
 
                         <div
-                        className="custom-control custom-switch"
+                            className="custom-control custom-switch"
                             key={additionalData.id}
                         >
                             <input
@@ -25,6 +25,7 @@ class SnackAdditional extends React.Component {
                                 id={additionalData.id}
                                 onChange={this.handleAdditionalChange}
                                 value={additionalData.id}
+                                checked={!!(request.additional && request.additional.some(additional => additional.id === additionalData.id))}
                             />
                             <label className="custom-control-label" htmlFor={additionalData.id}>
                                 {additionalData.name} {additionalData.preparationTime ? `(Adicional ${new Date(additionalData.preparationTime / 10000).getMinutes()}:00 minutos)` : ''}
@@ -60,7 +61,7 @@ class SnackAdditional extends React.Component {
         let newAdditional;
 
         if (addedAdditional.some(additional => additional.id === value)) {
-            newAdditional = addedAdditional.filter(additional => additional.id != value)
+            newAdditional = addedAdditional.filter(additional => additional.id !== value)
         } else {
 
             const selectedAdditional = additional.find(additional => additional.id === value)

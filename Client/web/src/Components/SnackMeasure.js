@@ -23,6 +23,7 @@ class SnackMeasure extends React.Component {
                                 id={measure.id}
                                 onChange={this.handleMeasureChange}
                                 value={measure.id}
+                                checked={!!(request.measure && request.measure.id === measure.id)}
                             />
                             <label className="custom-control-label" htmlFor={measure.id}>
                                 {measure.size} {measure.description}

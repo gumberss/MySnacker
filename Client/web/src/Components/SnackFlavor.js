@@ -22,6 +22,7 @@ class SnackFlavor extends React.Component {
                                 id={flavor.id}
                                 onChange={this.handleFlavorChange}
                                 value={flavor.id}
+                                checked={!!(request.flavor && request.flavor.id === flavor.id)}
                             />
                             <label className="custom-control-label" htmlFor={flavor.id}>
                                 {flavor.name} {flavor.preparationTime ? `(Adicional ${new Date(flavor.preparationTime / 10000).getMinutes()}:00 minutos)` : ''}
