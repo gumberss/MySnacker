@@ -1,8 +1,12 @@
+import call from '../DataServices/api'
 
 export const START_REQUEST = 'START_REQUEST'
 export const SELECT_MEASURE = 'SELECT_MEASURE'
 export const SELECT_FLAVOR = 'SELECT_FLAVOR'
 export const SELECT_ADDITIONAL = 'SELECT_ADDITIONAL'
+export const CLOSE_ORDER = 'CLOSE_ORDER'
+export const RESET_REQUEST = 'RESET_REQUEST'
+
 
 export function startRequest(snack) {
     return {
@@ -32,5 +36,29 @@ export function selectAdditional(snackId, additional) {
         type: SELECT_ADDITIONAL,
         snackId,
         additional
+    }
+}
+
+function closeOrder(request) {
+    return {
+        type: CLOSE_ORDER,
+        request
+    }
+}
+
+export function handleCloseOrder(request, nextAction){  
+    return dispatch => {
+        return call('Request', 'POST', request)
+        .then(request => {
+            nextAction()
+            dispatch(closeOrder(request))
+        })
+    }
+}
+
+export function resetRequest(snackId) {
+    return {
+        type: RESET_REQUEST,
+        snackId
     }
 }

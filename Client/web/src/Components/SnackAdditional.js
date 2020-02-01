@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { selectAdditional } from '../Actions/request'
+import ProgressButtons from './ProgressButtons'
 
 class SnackAdditional extends React.Component {
 
@@ -10,14 +11,13 @@ class SnackAdditional extends React.Component {
 
         return (
             <>
-                <h3>{request.name} {request.measure.size}</h3>
-
                 <div style={styles.content}>
                     {additional && additional.map(additionalData => (
 
                         <div
                             className="custom-control custom-switch"
                             key={additionalData.id}
+                            style={styles.dataItem}
                         >
                             <input
                                 type="checkbox"
@@ -27,28 +27,20 @@ class SnackAdditional extends React.Component {
                                 value={additionalData.id}
                                 checked={!!(request.additional && request.additional.some(additional => additional.id === additionalData.id))}
                             />
+
                             <label className="custom-control-label" htmlFor={additionalData.id}>
-                                {additionalData.name} {additionalData.preparationTime ? `(Adicional ${new Date(additionalData.preparationTime / 10000).getMinutes()}:00 minutos)` : ''}
+                                {additionalData.name}
+                                {(additionalData.additionalPrice && <><br /> {`(Adicional R$${additionalData.additionalPrice})`}</>) || ''}
+                                {(additionalData.preparationTime && <><br /> {` (Adicional ${new Date(additionalData.preparationTime / 10000).getMinutes()}:00 minutos)`}</>) || ''}
                             </label>
+
                         </div>))}
                 </div>
 
-                <div style={styles.progressButtonsContainer}>
-                    <div style={styles.progressButtonsContainerData}>
-                        <button
-                            className="btn btn-outline-secondary"
-                            onClick={goBack}
-                        >
-                            Voltar
-                        </button>
-                        <button
-                            className="btn btn-outline-primary"
-                            onClick={goAhead}
-                        >
-                            Continuar
-                        </button>
-                    </div>
-                </div>
+                <ProgressButtons
+                    goBack={goBack}
+                    goAhead={goAhead}
+                />
             </>)
     }
 
@@ -87,6 +79,9 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-between',
         padding: '6px'
+    },
+    dataItem: {
+        marginTop: '8px',
     }
 }
 

@@ -5,6 +5,7 @@ import SnackView from './SnackView'
 import SnackMeasure from './SnackMeasure'
 import SnackFlavor from './SnackFlavor'
 import SnackAdditional from './SnackAdditional'
+import SnackDetails from './SnackDetails'
 
 class SnackCard extends React.Component {
 
@@ -19,16 +20,17 @@ class SnackCard extends React.Component {
 
     render() {
 
-        const viewsFunction = (id, goAhead, goBack) => {
+        const viewsFunction = id => {
             return [
-                <SnackView id={id} goAhead={goAhead} goBack={goBack} />,
-                <SnackMeasure id={id} goAhead={goAhead} goBack={goBack} />,
-                <SnackFlavor id={id} goAhead={goAhead} goBack={goBack} />,
-                <SnackAdditional id={id} goAhead={goAhead} goBack={goBack} />
+                <SnackView id={id} goAhead={this.goAhead} goBack={this.goBack} />,
+                <SnackMeasure id={id} goAhead={this.goAhead} goBack={this.goBack} />,
+                <SnackFlavor id={id} goAhead={this.goAhead} goBack={this.goBack} />,
+                <SnackAdditional id={id} goAhead={this.goAhead} goBack={this.goBack} />,
+                <SnackDetails id={id} goAhead={this.reset} goBack={this.goBack} />
             ]
         }
 
-        const { id } = this.props
+        const { id, snack, request } = this.props
 
         const { focused, progress } = this.state
         const { card } = styles
@@ -37,7 +39,7 @@ class SnackCard extends React.Component {
 
         const cardStyle = { ...card, ...cardFocusedtyle }
 
-        const views = viewsFunction(id, this.goAhead, this.goBack)
+        const views = viewsFunction(id)
 
         return (
             <div
@@ -46,6 +48,9 @@ class SnackCard extends React.Component {
                 onMouseEnter={this.onFocus}
                 onMouseLeave={this.onFocusLost}
             >
+                {request && <h4>{request.name} {request.flavor && ` de ${request.flavor.name}`} {request.measure && request.measure.size}</h4>}
+                {request && <hr style={styles.line} />}
+
                 {views[progress]}
             </div>
         )
@@ -53,6 +58,10 @@ class SnackCard extends React.Component {
 
     goAhead = () => {
         this.setState(({ progress }) => ({ progress: ++progress }))
+    }
+
+    reset = () => {
+        this.setState(({ progress: 0 }))
     }
 
     goBack = () => {
@@ -79,10 +88,15 @@ const styles = {
     cardFocused: {
         boxShadow: '5px 5px 10px #888888'
     },
+    line: {
+        margin: '0px',
+        marginTop: '1px',
+    }
 }
 
-const mapStateToProps = ({ snacks }, { id }) => ({
-    snack: snacks[id]
+const mapStateToProps = ({ snacks, requests }, { id }) => ({
+    snack: snacks[id],
+    request: requests[id]
 })
 
 export default connect(mapStateToProps)(SnackCard)

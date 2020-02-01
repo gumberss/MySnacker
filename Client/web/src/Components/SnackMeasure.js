@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectMeasure } from '../Actions/request'
+import ProgressButtons from './ProgressButtons'
 
 class SnackMeasure extends React.Component {
 
@@ -9,48 +10,34 @@ class SnackMeasure extends React.Component {
 
         return (
             <>
-                <h3>{request.name} {request.measure && request.measure.size}</h3>
-
                 <div style={styles.content}>
                     {measures && measures
-                    .sort((first, second) => first.price - second.price)
-                    .map(measure => (
-                        <div className="custom-control custom-radio" key={measure.id}>
-                            <input
-                                type="radio"
-                                name={`measure_for_${request.id}`}
-                                className="custom-control-input"
-                                id={measure.id}
-                                onChange={this.handleMeasureChange}
-                                value={measure.id}
-                                checked={!!(request.measure && request.measure.id === measure.id)}
-                            />
-                            <label className="custom-control-label" htmlFor={measure.id}>
-                                {measure.size} {measure.description}
-                                {measure.price && (<><br /> {`(Adicional R$${measure.price})`}</>)}
-                                {measure.preparationTime && (<><br /> {` (Adicional ${new Date(measure.preparationTime / 10000).getMinutes()}:00 minutos)`}</>)}
-                            </label>
-                        </div>
-                    ))}
+                        .sort((first, second) => first.price - second.price)
+                        .map(measure => (
+                            <div className="custom-control custom-radio" style={styles.dataItem} key={measure.id}>
+                                <input
+                                    type="radio"
+                                    name={`measure_for_${request.id}`}
+                                    className="custom-control-input"
+                                    id={measure.id}
+                                    onChange={this.handleMeasureChange}
+                                    value={measure.id}
+                                    checked={!!(request.measure && request.measure.id === measure.id)}
+                                />
+                                <label className="custom-control-label" htmlFor={measure.id}>
+                                    {measure.size} {measure.description}
+                                    {measure.price && (<><br /> {`(Adicional R$${measure.price})`}</>)}
+                                    {measure.preparationTime && (<><br /> {` (Adicional ${new Date(measure.preparationTime / 10000).getMinutes()}:00 minutos)`}</>)}
+                                </label>
+                            </div>
+                        ))}
                 </div>
 
-                <div style={styles.progressButtonsContainer}>
-                    <div style={styles.progressButtonsContainerData}>
-                        <button
-                            className="btn btn-outline-secondary"
-                            onClick={goBack}
-                        >
-                            Voltar
-                        </button>
-                        <button
-                            className="btn btn-outline-primary"
-                            onClick={goAhead}
-                            disabled={!request.measure}
-                        >
-                            Continuar
-                        </button>
-                    </div>
-                </div>
+                <ProgressButtons
+                    goBack={goBack}
+                    goAhead={goAhead}
+                    goAheadDisabled={!request.measure}
+                />
             </>)
     }
 
@@ -79,6 +66,9 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-between',
         padding: '6px'
+    },
+    dataItem: {
+        marginTop: '8px',
     }
 }
 

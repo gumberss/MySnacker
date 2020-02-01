@@ -6,6 +6,7 @@ import { startRequest } from '../Actions/request'
 
 import logo from '../Assets/loadinngSnackData.gif'
 
+
 class SnackView extends React.Component {
 
     state = {

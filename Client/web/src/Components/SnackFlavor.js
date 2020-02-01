@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { selectFlavor } from '../Actions/request'
+import ProgressButtons from './ProgressButtons'
 
 class SnackFlavor extends React.Component {
 
@@ -10,11 +11,9 @@ class SnackFlavor extends React.Component {
 
         return (
             <>
-                <h3>{request.name} {request.measure.size}</h3>
-
                 <div style={styles.content}>
                     {flavors && flavors.map(flavor => (
-                        <div className="custom-control custom-radio" key={flavor.id}>
+                        <div className="custom-control custom-radio"  style={styles.dataItem} key={flavor.id}>
                             <input
                                 type="radio"
                                 name={`flavor_for_${request.id}`}
@@ -25,28 +24,17 @@ class SnackFlavor extends React.Component {
                                 checked={!!(request.flavor && request.flavor.id === flavor.id)}
                             />
                             <label className="custom-control-label" htmlFor={flavor.id}>
-                                {flavor.name} {flavor.preparationTime ? `(Adicional ${new Date(flavor.preparationTime / 10000).getMinutes()}:00 minutos)` : ''}
+                                {flavor.name} {(flavor.preparationTime && `(Adicional ${new Date(flavor.preparationTime / 10000).getMinutes()}:00 minutos)`) || ''}
                             </label>
                         </div>
                     ))}
                 </div>
 
-                <div style={styles.progressButtonsContainer}>
-                    <div style={styles.progressButtonsContainerData}>
-                        <button
-                            className="btn btn-outline-secondary"
-                            onClick={goBack}
-                        >
-                            Voltar
-                        </button>
-                        <button
-                            className="btn btn-outline-primary"
-                            onClick={goAhead}
-                        >
-                            Continuar
-                        </button>
-                    </div>
-                </div>
+                <ProgressButtons
+                    goBack={goBack}
+                    goAhead={goAhead}
+                    goAheadDisabled={!request.flavor}
+                />
             </>)
     }
 
@@ -76,6 +64,9 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-between',
         padding: '6px'
+    },
+    dataItem: {
+        marginTop: '8px',
     }
 }
 
