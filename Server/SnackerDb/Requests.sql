@@ -5,6 +5,7 @@
     [FlavorId] UNIQUEIDENTIFIER NOT NULL, 
 	[SnackId] UNIQUEIDENTIFIER NOT NULL, 
     [PreparationTime] BIGINT NOT NULL,
+	[TotalPrice] BIGINT NOT NULL,
     CONSTRAINT FK_Request_Measure FOREIGN KEY (MeasureId)
     REFERENCES Measures(Id),
 		CONSTRAINT FK_Request_Flavor FOREIGN KEY (FlavorId)

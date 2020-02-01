@@ -19,11 +19,14 @@ using MySnacker.Domain.Entities;
 using MySnacker.Domain.Interfaces.ApplicationServices;
 using MySnacker.Domain.Interfaces.Data;
 using MySnacker.Domain.ViewModels;
+using MySnacker.Profiles;
 
 namespace MySnacker
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -50,10 +53,25 @@ namespace MySnacker
                 cfg.CreateMap<Snack, SnackData>().ReverseMap();
                 cfg.CreateMap<Flavor, FlavorData>().ReverseMap();
                 cfg.CreateMap<Measure, MeasureData>().ReverseMap();
+                cfg.CreateMap<Additional, AdditionalData>().ReverseMap();
+                
+                cfg.AddProfile<RequestDtoRequestMapper>();
             });
 
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +83,8 @@ namespace MySnacker
             }
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 

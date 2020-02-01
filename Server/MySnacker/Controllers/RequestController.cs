@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using MySnacker.Domain.DTOs;
 using MySnacker.Domain.Entities;
 using MySnacker.Domain.Interfaces.ApplicationServices;
 
@@ -13,18 +11,24 @@ namespace MySnacker.Controllers
     public class RequestController : ControllerBase
     {
         private readonly IRequestAppService _requestAppService;
+        private readonly IMapper _mapper;
 
-        public RequestController(IRequestAppService requestAppService)
+        public RequestController(IRequestAppService requestAppService, IMapper mapper)
         {
             _requestAppService = requestAppService;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Request request)
+        public IActionResult Post([FromBody] RequestDTO requestDTO)
         {
+            var request = _mapper.Map<Request>(requestDTO);
+
+            request.RequestAdditional.ForEach(x => x.RequestId = request.Id);
+
             _requestAppService.Store(request);
 
-            return Ok(request);
+            return Ok(requestDTO);
         }
     }
 }

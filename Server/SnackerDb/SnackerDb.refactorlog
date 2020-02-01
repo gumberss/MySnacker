@@ -28,4 +28,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="MeasureId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0b1bf611-bee2-41e7-93d5-ff9c12d4e3be" ChangeDateTime="02/01/2020 02:11:50">
+    <Property Name="ElementName" Value="[dbo].[RequestAdditional].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RequestAdditional]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RequestId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8134bcb6-3b9b-46a3-af5c-dec2719a78ef" ChangeDateTime="02/01/2020 02:22:14">
+    <Property Name="ElementName" Value="[dbo].[Additional].[AdditionalTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Additional]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PreparationTime" />
+  </Operation>
 </Operations>

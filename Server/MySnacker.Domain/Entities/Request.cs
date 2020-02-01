@@ -21,6 +21,8 @@ namespace MySnacker.Domain.Entities
 
         public long PreparationTime { get; set; }
 
-        List<Additional> Additionals { get; set; }
+        public decimal TotalPrice { get; set; }
+
+        public List<RequestAdditional> RequestAdditional { get; set; }
     }
 }

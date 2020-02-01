@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { handleGetSnacks } from '../Actions/snacks'
 import SnackCard from '../Components/SnackCard'
 
+import logo from '../Assets/loadinngSnackData.gif'
+
 class SnackList extends React.Component {
 
     state = {
@@ -28,11 +30,9 @@ class SnackList extends React.Component {
         const { loadedSnacks } = this.state
         const { snackIds } = this.props
 
-        if (!loadedSnacks) return (<div> Calma </div>)
-
-
         return (<div className="container">
-            {snackIds.map(snackId => <SnackCard key={snackId} id={snackId} />)}
+            {!loadedSnacks && (<img className="mx-auto" src={logo} />)}
+            {loadedSnacks && snackIds.map(snackId => <SnackCard key={snackId} id={snackId} />)}
         </div>)
     }
 }

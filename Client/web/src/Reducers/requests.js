@@ -36,7 +36,7 @@ const acceptedActions = {
     }),
     [RESET_REQUEST]: (state, action) => ({
         ...state,
-        [action.snackId]: { }
+        [action.snackId]: undefined
     }),
 }
 

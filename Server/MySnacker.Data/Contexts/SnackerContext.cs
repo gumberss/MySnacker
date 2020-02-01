@@ -20,7 +20,7 @@ namespace MySnacker.Data.Contexts
             modelBuilder.ApplyConfiguration(new FlavorConfiguration());
             modelBuilder.ApplyConfiguration(new MeasureConfiguration());
             modelBuilder.ApplyConfiguration(new RequestConfiguration());
-            modelBuilder.ApplyConfiguration(new SnackConfiguration());
+            modelBuilder.ApplyConfiguration(new RequestAdditionalConfiguration());
         }
 
         public SnackerContext(DbContextOptions<SnackerContext> options)

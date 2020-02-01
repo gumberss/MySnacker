@@ -30,7 +30,7 @@ class SnackCard extends React.Component {
             ]
         }
 
-        const { id, snack, request } = this.props
+        const { id, request } = this.props
 
         const { focused, progress } = this.state
         const { card } = styles

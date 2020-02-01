@@ -60,13 +60,13 @@
     <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Additionals.sql" />
-    <Build Include="AdditionalRequests.sql" />
+    <Build Include="Additional.sql" />
     <Build Include="Flavors.sql" />
     <Build Include="Measures.sql" />
     <Build Include="Requests.sql" />
     <Build Include="Snacks.sql" />
     <Build Include="Scripts\InitialData.sql" />
+    <Build Include="RequestAdditional.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SnackerDb.refactorlog" />

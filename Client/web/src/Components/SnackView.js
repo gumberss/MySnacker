@@ -22,7 +22,7 @@ class SnackView extends React.Component {
             <>
                 <img
                     style={styles.image}
-                    src="https://cdn.awsli.com.br/800x800/163/163535/produto/6024236/de8940b4fa.jpg"
+                    src={snack.image}
                 />
                 <h4>{snack.name}</h4>
 

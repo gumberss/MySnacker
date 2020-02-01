@@ -17,8 +17,6 @@ namespace MySnacker.Data.Configurations
                 .WithMany(x => x.Requests)
                 .HasForeignKey(x => x.FlavorId);
 
-            //todo: configurar aditional
-
             builder
                 .HasOne(x => x.Snack)
                 .WithMany(x => x.Requests)
