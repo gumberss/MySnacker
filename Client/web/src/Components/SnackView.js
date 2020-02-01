@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { handleGetSnackData } from '../Actions/snacks'
+import { startRequest } from '../Actions/request'
 
 import logo from '../Assets/loadinngSnackData.gif'
 
@@ -38,11 +39,13 @@ class SnackView extends React.Component {
     }
 
     onSelectSnack = () => {
-        const { goAhead, handleGetSnackData, snack } = this.props
+        const { snack, goAhead, startRequest, handleGetSnackData } = this.props
 
         this.setState({ loadingData: true })
 
         const nextAction = () => {
+
+            startRequest(snack)
 
             this.setState({ loadingData: false })
 
@@ -77,8 +80,8 @@ const mapStateToProps = ({ snacks }, { id }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    handleGetSnackData: (snackId, onLoadedSnackData) => dispatch(handleGetSnackData(snackId, onLoadedSnackData))
+    handleGetSnackData: (snackId, onLoadedSnackData) => dispatch(handleGetSnackData(snackId, onLoadedSnackData)),
+    startRequest: snackId => dispatch(startRequest(snackId))
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SnackView)

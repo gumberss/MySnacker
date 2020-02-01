@@ -22,7 +22,6 @@ export function handleGetSnacks(nextAction){
     }
 }
 
-
 function getSnackData(snack) {
     return {
         type: RECEIVE_SNACK_DATA,

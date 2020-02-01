@@ -1,20 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { selectFlavor } from '../Actions/request'
+
 class SnackFlavor extends React.Component {
-    //todo: snack pode virar request depois de escolher o produto
+
     render() {
-        const { snack, flavors, goAhead, goBack } = this.props
+        const { request, flavors, goAhead, goBack } = this.props
 
         return (
             <>
-                <h3>{snack.name}</h3>
+                <h3>{request.name} {request.measure && request.measure.size}</h3>
 
                 <div style={styles.content}>
                     {flavors && flavors.map(flavor => (
-                        <div className="custom-control custom-radio">
-                            <input type="radio" name={`measure_for_${snack.id}`} className="custom-control-input" id={flavor.id} />
-                            <label className="custom-control-label" for={flavor.id}>
+                        <div className="custom-control custom-radio" key={flavor.id}>
+                            <input
+                                type="radio"
+                                name={`flavor_for_${request.id}`}
+                                className="custom-control-input"
+                                id={flavor.id}
+                                onChange={this.handleMeasureChange}
+                                value={flavor.id}
+                            />
+                            <label className="custom-control-label" htmlFor={flavor.id}>
                                 {flavor.name} {flavor.preparationTime ? `(Adicional ${new Date(flavor.preparationTime / 10000).getMinutes()}:00 minutos)` : ''}
                             </label>
                         </div>
@@ -40,11 +49,14 @@ class SnackFlavor extends React.Component {
             </>)
     }
 
-    onFocus = () => {
-        this.setState({ focused: true })
-    }
-    onFocusLost = () => {
-        this.setState({ focused: false })
+
+    handleMeasureChange = changeEvent => {
+        const { id, selectFlavor, flavors } = this.props
+        const { value } = changeEvent.target
+
+        const selectedFlavor = flavors.find(flavor => flavor.id === value)
+
+        selectFlavor(id, selectedFlavor)
     }
 }
 
@@ -66,10 +78,14 @@ const styles = {
     }
 }
 
-const mapStateToProps = ({ snacks, flavors }, { id }) => ({
-    snack: snacks[id],
+const mapStateToProps = ({ requests, flavors }, { id }) => ({
+    request: requests[id],
     flavors: flavors[id]
 
 })
 
-export default connect(mapStateToProps)(SnackFlavor)
+const mapDispatchToProps = dispatch => ({
+    selectFlavor: (snackId, flavor) => dispatch(selectFlavor(snackId, flavor))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SnackFlavor)

@@ -1,20 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { selectMeasure } from '../Actions/request'
 
 class SnackMeasure extends React.Component {
 
     render() {
-        const { snack, measures, goAhead, goBack } = this.props
+        const { request, measures, goAhead, goBack } = this.props
 
         return (
             <>
-                <h3>{snack.name}</h3>
+                <h3>{request.name} {request.measure && request.measure.size}</h3>
 
                 <div style={styles.content}>
                     {measures && measures.map(measure => (
-                        <div className="custom-control custom-radio">
-                            <input type="radio" name={`measure_for_${snack.id}`} className="custom-control-input" id={measure.id} />
-                            <label className="custom-control-label" for={measure.id}>
+                        <div className="custom-control custom-radio" key={measure.id}>
+                            <input
+                                type="radio"
+                                name={`measure_for_${request.id}`}
+                                className="custom-control-input"
+                                id={measure.id}
+                                onChange={this.handleMeasureChange}
+                                value={measure.id}
+                            />
+                            <label className="custom-control-label" htmlFor={measure.id}>
                                 {measure.size} {measure.description}
                                 {measure.price && (<><br /> {`(Adicional R$${measure.price})`}</>)}
                                 {measure.preparationTime && (<><br /> {` (Adicional ${new Date(measure.preparationTime / 10000).getMinutes()}:00 minutos)`}</>)}
@@ -34,6 +42,7 @@ class SnackMeasure extends React.Component {
                         <button
                             className="btn btn-outline-primary"
                             onClick={goAhead}
+                            disabled={!request.measure}
                         >
                             Continuar
                         </button>
@@ -42,11 +51,13 @@ class SnackMeasure extends React.Component {
             </>)
     }
 
-    onFocus = () => {
-        this.setState({ focused: true })
-    }
-    onFocusLost = () => {
-        this.setState({ focused: false })
+    handleMeasureChange = changeEvent => {
+        const { id, selectMeasure, measures } = this.props
+        const { value } = changeEvent.target
+
+        const selectedMeasure = measures.find(measure => measure.id === value)
+
+        selectMeasure(id, selectedMeasure)
     }
 }
 
@@ -68,10 +79,14 @@ const styles = {
     }
 }
 
-const mapStateToProps = ({ snacks, measures }, { id }) => ({
+const mapStateToProps = ({ snacks, measures, requests }, { id }) => ({
     snack: snacks[id],
-    measures: measures[id]
-
+    measures: measures[id],
+    request: requests[id]
 })
 
-export default connect(mapStateToProps)(SnackMeasure)
+const mapDispatchToProps = dispatch => ({
+    selectMeasure: (snackId, measure) => dispatch(selectMeasure(snackId, measure))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SnackMeasure)
