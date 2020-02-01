@@ -22,17 +22,27 @@ class SnackDetails extends React.Component {
 
         const totalPrice = this.getTotalPrice(request)
 
+        const additionalFormat = (additional) => {
+
+            const valueText = 
+                additional.additionalPrice
+                ? ` (R$ ${additional.additionalPrice})`
+                : ''
+
+            return `${additional.name}${valueText}`
+        }
+
         return (
             <>
                 <div style={styles.content}>
                     <p> <b>Sabor:</b> {request.flavor.name}</p>
-                    <p> <b>Tamanho:</b> {request.measure.size} ({request.measure.description})</p>
+                    <p> <b>Tamanho:</b> {request.measure.size} ({request.measure.description}) R${request.measure.price}</p>
                     <p><b>Tempo de preparo:</b> {new Date(totalPreparationTime / 10000).getMinutes()}:00 minutos </p>
                     <p><b>Valor total:</b> R${totalPrice}</p>
 
                     {(request.additional && request.additional.length && <p><b>Adicionais:</b> {request.additional
-                        .map(additional => additional.name)
-                        .reduce((acc, current) => `${acc}, ${current}`)}</p>) || ''}
+                        .reduce((acc, current) => `${acc}, ${additionalFormat(current)}`, '')
+                        .substring(1)}</p>) || ''}
                 </div>
                 {
                     requestingOrder
@@ -47,7 +57,7 @@ class SnackDetails extends React.Component {
     }
 
     onCloseOrder = () => {
-        const { handleCloseOrder, request, goAhead, resetRequest} = this.props
+        const { handleCloseOrder, request, goAhead, resetRequest } = this.props
 
         this.setState({ requestingOrder: true })
 
